@@ -69,3 +69,22 @@ export const deleteEvent = async (req, res) => {
     res.status(500).json({ message: "Error deleting event", error: err.message });
   }
 };
+
+
+export const uploadEventBanner = async (req, res) => {
+    try {
+      const event = await Event.findById(req.params.id);
+  
+      if (!event) return res.status(404).json({ message: "Event not found" });
+  
+      if (event.createdBy.toString() !== req.user.userId)
+        return res.status(403).json({ message: "Unauthorized" });
+  
+      event.bannerUrl = `/uploads/${req.file.filename}`;
+      await event.save();
+  
+      res.status(200).json({ message: "Banner uploaded", bannerUrl: event.bannerUrl });
+    } catch (err) {
+      res.status(500).json({ message: "Upload failed", error: err.message });
+    }
+  };

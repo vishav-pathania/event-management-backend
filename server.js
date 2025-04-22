@@ -12,6 +12,7 @@ import eventRoutes from "./routes/eventRoutes.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { startCronJobs } from "./utils/cronJobs.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(logger);
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
 
 app.use("/auth", authRoutes);
 
@@ -50,3 +52,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+startCronJobs();

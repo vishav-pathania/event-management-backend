@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "740acfa0-5080-44b8-b6c4-0e21f434e4a7",
+		"name": "Event Management Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44284998",
+		"_collection_link": "https://vishavpathania-2114437.postman.co/workspace/Vishav-Pathania's-Workspace~c335b772-6776-467a-8b18-dcde3b0f59d6/collection/44284998-740acfa0-5080-44b8-b6c4-0e21f434e4a7?action=share&source=collection_link&creator=44284998"
+	},
+	"item": [
+		{
+			"name": "resgister",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"secret123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/register",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "your_jwt",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"secret123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "your_jwt",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Testing 8\",\n  \"description\": \"A testing 8\",\n  \"location\": \"In Belapur 8\",\n  \"startTime\": \"2025-04-22T15:55:00Z\",\n  \"endTime\": \"2025-04-22T16:00:00Z\",\n  \"maxParticipants\": 88\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/events",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/events",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get event by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/events/6807927bdab8d12309a25ad2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"events",
+						"6807927bdab8d12309a25ad2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update event by event id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "your_jwt",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"location\": \"Belapur\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/events/6807927bdab8d12309a25ad2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"events",
+						"6807927bdab8d12309a25ad2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "your_jwt",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/events/6807927bdab8d12309a25ad2",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"events",
+						"6807927bdab8d12309a25ad2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "your_jwt",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "banner",
+							"type": "file",
+							"src": "/home/vishav/Downloads/Vishav-img.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{local}}/events/6807a2b1b9c8a2df41eb5e65/upload",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"events",
+						"6807a2b1b9c8a2df41eb5e65",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

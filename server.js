@@ -3,8 +3,11 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import authRoutes from "./routes/authRoutes.js";
+import logger from "./middlewares/logger.js";
 
 import connectDB from './config/db.js';
+import auth from "./middlewares/auth.js";
+
 
 dotenv.config();
 
@@ -16,12 +19,16 @@ if (!process.env.MONGO_URI || !process.env.PORT) {
 connectDB();
 
 const app = express();
-
+app.use(logger);
 app.use(cors());
 app.use(express.json()); 
 app.use(morgan("dev")); 
 
 app.use("/auth", authRoutes);
+
+app.get("/protected", auth, (req, res) => {
+  res.json({ message: "Access granted", user: req.user });
+});
 
 // Test Route
 app.get("/", (req, res) => {

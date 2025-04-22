@@ -14,6 +14,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { startCronJobs } from "./utils/cronJobs.js";
 
+import errorHandler from "./middlewares/errorHandler.js";
+
 dotenv.config();
 
 if (!process.env.MONGO_URI || !process.env.PORT) {
@@ -32,9 +34,6 @@ app.use(morgan("dev"));
 
 app.use("/auth", authRoutes);
 
-app.get("/protected", auth, (req, res) => {
-  res.json({ message: "Access granted", user: req.user });
-});
 
 // Test Route
 app.get("/", (req, res) => {
@@ -53,5 +52,5 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-
+app.use(errorHandler);
 startCronJobs();
